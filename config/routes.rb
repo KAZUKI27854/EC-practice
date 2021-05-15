@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   namespace :customer do
     resources :orders
-    post '/confirm' => 'orders#confirm'
+    get '/confirm' => 'orders#confirm'
   end
 end

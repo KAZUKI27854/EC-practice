@@ -14,7 +14,9 @@ class Customer::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new(order_params)
+    @current_customer = Customer.first
+    @cart_items = CartItem.where(customer_id: @current_customer.id)
+    #@order = Order.new(order_params)
   end
 
   def create
