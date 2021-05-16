@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     resources :customers
   end
 
-  namespace :customer do
+  scope module: :customer do
     resources :orders
-    get '/confirm' => 'orders#confirm'
+    post 'orders/confirm' => 'orders#confirm', as: :order_confirm
   end
 end

@@ -14,7 +14,7 @@
             <tr>
               <td>
                 <!--%= attachment_image_tag( cart_item(cart_item.id).image_id, :image, size: "60x50", fallback: "no_image.jpg") %-->
-                <%= cart_item(cart_item.id).name %>
+                <%= cart_item.item.name %>
               </td>
               <td>
                 <%= tax_price(cart_item.item_id).to_s(:delimited) %>
@@ -30,41 +30,42 @@
         </tbody>
       </table>
     </div>
-<%
-=begin
-%>
-    <div class="col-xs-3 billing">
+
+    <div>
       <table class="table table-hover table-condensed table-bordered">
           <tr>
-            <th class="info">送料</th>
-            <td class="text-right col-xs-5">¥<%= @order.postage %></td>
+            <th>送料</th>
+            <td><%= @order.postage %></td>
           </tr>
           <tr>
-            <th class="info">商品合計</th>
-            <td class="text-right">¥<%= total_price(@cart_items).to_s(:delimited) %></td>
+            <th>商品合計</th>
+            <td><%= cart_items_total_price(1).to_s(:delimited) %></td>
           </tr>
           <tr>
-            <th class="info">請求金額</th>
-            <td class="text-right">¥<%= billing(@order).to_s(:delimited) %></td>
+            <th>請求金額</th>
+            <td>¥<%= billing(1,@ordr.id).to_s(:delimited) %></td>
           </tr>
       </table>
     </div>
-    <div class="col-xs-9 billing">
+    <div>
       <table class="table table-hover table-condensed table-bordered">
         <tr>
-          <th  class="info">支払方法</th>
-          <td class="text-left">
+          <th>支払方法</th>
+          <td>
             <%= @order.payment_method %>
           </td>
         </tr>
         <tr>
-          <th  class="info">お届け先</th>
-          <td class="text-left">
-            <%= "#{@order.postal_code} #{@order.address} 　#{@order.name}" %>
+          <th>お届け先</th>
+          <td>
+            <!--%= "#{@order.postcode} #{@order.address} 　#{@order.name}" %-->
           </td>
         </tr>
       </table>
 
+<%
+=begin
+ %>
       <!-- 表示とformを分けて記入 -->
       <div class ="col-xs-11">
       <%= form_with model: @order, url: customers_orders_path, method: :post, local: true do |f| %>

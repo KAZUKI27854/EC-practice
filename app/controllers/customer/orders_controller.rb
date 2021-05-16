@@ -1,10 +1,9 @@
 class Customer::OrdersController < ApplicationController
   def new
     @order = Order.new
-    @current_customer = Customer.first
-    @customer_postcode = @current_customer.postcode
-    @customer_address = @current_customer.address
-    #@customer_address = current_customer.address
+    current_customer = Customer.find(1)
+    @my_postcode = current_customer.postcode
+    @my_address = current_customer.address
     #@delivery_address_list = Delivery.where(customer_id: current_customer.id)
 
     #cart_items = current_customer.cart_items
@@ -16,11 +15,15 @@ class Customer::OrdersController < ApplicationController
   def confirm
     @current_customer = Customer.first
     @cart_items = CartItem.where(customer_id: @current_customer.id)
-    #@order = Order.new(order_params)
+    @order = Order.new(order_params)
+    @postage = 800
   end
 
   def create
     @order = current_customer.order.new(order_params)
+  end
+
+  def show
   end
 
   private

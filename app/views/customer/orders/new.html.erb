@@ -1,6 +1,6 @@
 <h2 class="page-header">注文情報入力</h2>
 <div class="row">
-  <%= form_with model: @order, url: {action: 'confirm'}, local: true do |f| %>
+  <%= form_with model: @order, url: order_confirm_path, method: :post, local: true do |f| %>
     <h3>支払い方法</h3>
     <div class="form-group">
       <%= f.radio_button :payment_method, :"クレジットカード", checked: true %>
@@ -10,14 +10,18 @@
     </div>
     <h3>お届け先</h3>
     <div class="form-group">
-      <%= f.radio_button :delivery_address, :"#{@customer_address}", checked: true %>
+      <%= f.radio_button :delivery_address, :"#{@my_address}", checked: true %>
       <%= f.label :delivery_address, "ご自身の住所" %></br>
-      <%= f.label :delivery_address, "〒#{@customer_postcode}  #{@customer_address}" %></br>
-      <%= f.label :delivery_name, "#{customer_full_name(@current_customer.id)}" %>
+      <%= f.label :delivery_address, "〒#{@my_postcode}  #{@my_address}" %></br>
+      <%= f.label :delivery_name, "#{customer_full_name(current_customer.id)}" %>
     </div>
     <div class="form-group">
-      <%= f.radio_button :delivery_address, :"#{@customer_address}" %>
+      <%= f.radio_button :delivery_address, :"#{@my_address}" %>
       <%= f.label :delivery_address, "登録済住所から選択" %>
     </div>
+
+    <%= f.hidden_field :postage, :value => 800 %>
+
+    <%= f.submit "確認画面へ進む" %>
   <% end %>
 </div>
