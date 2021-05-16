@@ -1,5 +1,14 @@
 module ApplicationHelper
 
+  def postage
+    800
+  end
+
+  #現状は軽減税率対象品のみのため消費税8％
+  def tax
+    0.08
+  end
+
   def current_customer
     Customer.find(1)
   end
@@ -9,8 +18,24 @@ module ApplicationHelper
     customer.last_name + customer.first_name
   end
 
+  def customer_full_address(customer_id)
+    customer = Customer.find_by(id: customer_id)
+    "#{customer.postcode} " + customer.address
+  end
+
+  def deliveries_full_address(customer_id)
+    deliveries = Delivery.where(customer_id: customer_id)
+    deliveries.each do |delivery|
+      "#{delivery.postcode} " + delivery.address + delivery.name
+    end
+  end
+
+  def delivery_full_address(delivery_id)
+    delivery = Delivery.find_by(id: delivery_id)
+    "#{delivery.postcode} " + "#{delivery.address} " + delivery.name
+  end
+
   def tax_price(item_id)
-    tax = 0.1
     market_price = Item.find_by(id: item_id).price
     ( market_price * (1 + tax) ).floor
   end
@@ -29,10 +54,15 @@ module ApplicationHelper
     return price
   end
 
-  def billing(customer_id, order_id)
-    order = Order.find_by(id: order_id)
-    cart_items_total_price(customer_id) + order.postage
+  def billing(customer_id)
+    cart_items_total_price(customer_id) + postage
   end
+
+
+  #def delivery_address(order_id)
+    #order = Order.find_by(id: order_id)
+    #order.delivery_postcode + order.delivery_address + order.delivery_name
+  #end
 
 
 end
