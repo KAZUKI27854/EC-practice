@@ -39,7 +39,27 @@ class Customer::OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.create(order_params)
+    current_customer = Customer.first
+    order = Order.create(order_params)
+    cart_items = CartItem.where(customer_id: current_customer.id)
+
+    cart_items.each do |cart_item|
+      #order_item = OrderItem.new
+      #order_item.order_id = order.id
+      #order_item.item_id = cart_item.item_id
+      #order_item.quantity = cart_item.quantity
+      #order_item.market_price = cart_item.item.price
+      #order_item.save
+      #cart_item.destroy
+
+      OrderItem.create(
+        order_id: order.id,
+        item_id: cart_item.item_id,
+        quantity: cart_item.quantity,
+        market_price: cart_item.item.price
+        )
+    end
+
     redirect_to order_complete_path
   end
 
