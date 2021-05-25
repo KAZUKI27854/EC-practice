@@ -1,21 +1,21 @@
 class Customer::OrdersController < ApplicationController
   include ApplicationHelper
 
+  before_action :authenticate_customer!
+
   def new
     @order = Order.new
-    current_customer = Customer.find(1)
     @my_postcode = current_customer.postcode
     @my_address = current_customer.address
     @deliveries = Delivery.where(customer_id: current_customer.id)
 
-    #cart_item = current_customer.cart_item
-    #if cart_item.empty?
-       #redirect_to cart_items_path
-    #end
+
+    if current_customer.cart_items.empty?
+      redirect_to cart_items_path
+    end
   end
 
   def confirm
-    current_customer = Customer.first
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @order = Order.new(order_params)
 
@@ -32,25 +32,27 @@ class Customer::OrdersController < ApplicationController
       @order.delivery_address = delivery.address
       @order.delivery_name = delivery.name
     when "新しい届け先"
-      @order.delivery_postcode = params[:order][:new_postcode]
-      @order.delivery_address = params[:order][:new_address]
-      @order.delivery_name = params[:order][:new_name]
+      if params[:order][:new_postcode].blank? || params[:order][:new_address].blank? || params[:order][:new_name].blank?
+        flash[:new_address_error] = "新規住所を選択時は、全ての項目を入力してください"
+        redirect_to new_order_path
+      else
+        @order.delivery_postcode = params[:order][:new_postcode]
+        @order.delivery_address = params[:order][:new_address]
+        @order.delivery_name = params[:order][:new_name]
+        delivery = Delivery.new
+        delivery.customer_id = current_customer.id
+        delivery.postcode = params[:order][:new_postcode]
+        delivery.address = params[:order][:new_address]
+        delivery.name = params[:order][:new_name]
+        delivery.save
+      end
     end
   end
 
   def create
-    current_customer = Customer.first
     order = Order.create(order_params)
-    cart_items = CartItem.where(customer_id: current_customer.id)
 
-    cart_items.each do |cart_item|
-      #order_item = OrderItem.new
-      #order_item.order_id = order.id
-      #order_item.item_id = cart_item.item_id
-      #order_item.quantity = cart_item.quantity
-      #order_item.market_price = cart_item.item.price
-      #order_item.save
-      #cart_item.destroy
+    current_customer.cart_items.each do |cart_item|
 
       OrderItem.create(
         order_id: order.id,
@@ -58,15 +60,27 @@ class Customer::OrdersController < ApplicationController
         quantity: cart_item.quantity,
         market_price: cart_item.item.price
         )
+
+      cart_item.destroy
+
     end
 
-    redirect_to order_complete_path
+    redirect_to orders_complete_path
   end
 
   def complete
   end
 
   def show
+    @order = Order.find_by(id: params[:id])
+    @order_items = @order.order_items
+    if (@order.customer != current_customer) && @order.blank?
+      redirect_to root_path
+    end
+  end
+
+  def index
+    @orders = current_customer.orders
   end
 
   private
