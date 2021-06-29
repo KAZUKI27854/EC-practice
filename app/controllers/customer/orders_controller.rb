@@ -62,7 +62,6 @@ class Customer::OrdersController < ApplicationController
         )
 
       cart_item.destroy
-
     end
 
     redirect_to orders_complete_path
