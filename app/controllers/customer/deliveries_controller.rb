@@ -15,6 +15,19 @@ class Customer::DeliveriesController < ApplicationController
     end
   end
   
+  def edit
+    @delivery = current_customer.deliveries.find(params[:id])
+  end
+
+  def update
+    @delivery = current_customer.deliveries.find(params[:id])
+    if @delivery.update(delivery_params)
+      redirect_to deliveries_path
+    else
+      render :edit
+    end
+  end
+  
   private
 
     def delivery_params
