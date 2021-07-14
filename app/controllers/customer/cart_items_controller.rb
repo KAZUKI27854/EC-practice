@@ -4,8 +4,8 @@ class Customer::CartItemsController < ApplicationController
 
   def create
     @cart_item = CartItem.new(cart_items_params)
-    @cart_item.customer_id = current_customer.id
-    cart_items_new = current_customer.cart_items.find_by(item_id: @cart_item.item_id)
+    @cart_item.customer_id = @customer.id
+    cart_items_new = @customer.cart_items.find_by(item_id: @cart_item.item_id)
 
 
     if cart_items_new.nil?
