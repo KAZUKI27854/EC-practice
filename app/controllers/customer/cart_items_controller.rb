@@ -7,7 +7,6 @@ class Customer::CartItemsController < ApplicationController
     @cart_item.customer_id = @customer.id
     cart_items_new = @customer.cart_items.find_by(item_id: @cart_item.item_id)
 
-
     if cart_items_new.nil?
       if @cart_item.save
         flash[:text] = "カートに追加しました"
