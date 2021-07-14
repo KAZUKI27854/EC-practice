@@ -4,9 +4,8 @@ module ApplicationHelper
     800
   end
 
-  #現状は軽減税率対象品のみのため消費税8％
   def tax
-    0.08
+    0.1
   end
 
   def current_customer
