@@ -52,12 +52,4 @@ module ApplicationHelper
   def billing(customer_id)
     cart_items_total_price(customer_id) + postage
   end
-
-
-  #def delivery_address(order_id)
-    #order = Order.find_by(id: order_id)
-    #order.delivery_postcode + order.delivery_address + order.delivery_name
-  #end
-
-
 end
