@@ -34,7 +34,7 @@ class Customer::CartItemsController < ApplicationController
   end
 
   def index
-    @cart_items = current_customer.cart_items
+    @cart_items = @customer.cart_items
   end
 
   def update
