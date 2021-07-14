@@ -8,10 +8,6 @@ module ApplicationHelper
     0.1
   end
 
-  def current_customer
-    Customer.find(1)
-  end
-
   def customer_full_name(customer_id)
     customer = Customer.find_by(id: customer_id)
     customer.last_name + customer.first_name
