@@ -1,6 +1,6 @@
 class Customer::CartItemsController < ApplicationController
   before_action :authenticate_customer!
-
+  before_action :set_current_customer
 
   def create
     @cart_item = CartItem.new(cart_items_params)
@@ -56,6 +56,10 @@ class Customer::CartItemsController < ApplicationController
   end
 
   private
+
+  def set_current_customer
+    @customer = current_customer
+  end
 
   def cart_items_params
     params.require(:cart_item).permit(:quantity, :customer_id, :item_id)
