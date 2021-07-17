@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     post 'orders/confirm' => 'orders#confirm', as: :order_confirm
     get 'orders/confirm' => 'orders#new'
     get 'orders/complete' => 'orders#complete', as: :order_complete
+    resources :deliveries, only: [:index, :create, :destroy, :edit, :update]
   end
 end
