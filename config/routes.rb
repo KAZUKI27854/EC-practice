@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   scope module: :customer do
     resources :customers, only: [:show, :edit, :update]
+    
     resources :orders, only: [:index, :show, :new, :create]
     post 'orders/confirm' => 'orders#confirm', as: :order_confirm
     get 'orders/confirm' => 'orders#new'
