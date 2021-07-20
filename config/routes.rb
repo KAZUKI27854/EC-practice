@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :customer do
+    
     resources :customers, only: [:show, :edit, :update]
     get 'customers/:id/destroy_confirm' => 'customers#destroy_confirm', as: :destroy_confirm
     patch 'customers/:id/withdraw' => 'customers#withdraw', as: :withdraw
