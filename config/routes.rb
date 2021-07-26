@@ -13,6 +13,7 @@ devise_for :admins, controllers: {
 
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update]
   end
 
   scope module: :customer do
