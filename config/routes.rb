@@ -15,6 +15,7 @@ devise_for :admins, controllers: {
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    
   end
 
   scope module: :customer do
