@@ -12,6 +12,7 @@ class Order < ApplicationRecord
       self.order_items.each do |order_item|
         order_item.update_attributes(product_status: "製作待ち")
       end
+    # 「入金確認」を誤選択した際に製作ステータスを「着手不可」へ戻すために記載
     elsif self.status == "入金待ち"
       self.order_items.each do |order_item|
         order_item.update_attributes(product_status: "着手不可")
