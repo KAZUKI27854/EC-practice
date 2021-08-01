@@ -5,4 +5,6 @@ class Item < ApplicationRecord
   belongs_to :genre
   
   attachment :image
+  
+  validates :name, :genre, :image, :caption, :price, presence: true
 end
