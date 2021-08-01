@@ -19,5 +19,4 @@ class OrderItem < ApplicationRecord
        self.order.update_attributes(status: "発送準備中")
      end
   end
-
 end
