@@ -5,4 +5,6 @@ class Admin::GenresController < ApplicationController
     @genre = Genre.new
     @genres = Genre.all
   end
+  
+  
 end
