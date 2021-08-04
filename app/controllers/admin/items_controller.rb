@@ -6,6 +6,17 @@ class Admin::ItemsController < ApplicationController
     @genres = Genre.all
   end
   
+  def create
+    @item = Item.new(params_item)
+    
+    if @item.save
+      redirect_to admin_item_path(@item)
+    else
+      @genres = Genre.all
+      render :new
+    end
+  end
+  
   private
 
   def params_item
