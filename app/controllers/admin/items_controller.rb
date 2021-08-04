@@ -5,4 +5,10 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new
     @genres = Genre.all
   end
+  
+  private
+
+  def params_item
+    params.require(:item).permit(:name, :caption, :price, :genre_id, :is_active, :image)
+  end
 end
