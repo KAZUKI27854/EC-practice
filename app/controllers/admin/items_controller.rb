@@ -17,6 +17,10 @@ class Admin::ItemsController < ApplicationController
     end
   end
   
+  def index
+    @items = Item.page(params[:page]).per(10)
+  end
+  
   private
 
   def params_item
