@@ -11,21 +11,21 @@
     </thead>
   </div>
   
-    <tbody>
-      <div class="row">
-    <% items.each do |item| %>
-      <tr>
-        <td><%= item.id %></td>
-        <td><%= link_to item.name, admin_item_path(item) %></td>
-        <td><%= (item.price).to_s(:delimited) %></td>
-        <td><%= item.genre.name %></td>
-        <% if item.is_active %>
-          <td>販売中</td>
-        <% else %>
-          <td>販売停止中</td>
-        <% end %>
-      </tr>
+  <tbody>
+    <div class="row">
+      <% items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= link_to item.name, admin_item_path(item) %></td>
+          <td><%= (item.price).to_s(:delimited) %></td>
+          <td><%= item.genre.name %></td>
+          <% if item.is_active %>
+            <td>販売中</td>
+          <% else %>
+            <td>販売停止中</td>
+          <% end %>
+        </tr>
       <% end %>
-      </div>
-    </tbody>
-  </table>
+    </div>
+  </tbody>
+</table>
