@@ -21,6 +21,8 @@ class Admin::ItemsController < ApplicationController
     @items = Item.page(params[:page]).per(10)
   end
   
+  
+  
   private
 
   def params_item
