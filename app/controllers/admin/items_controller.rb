@@ -25,6 +25,11 @@ class Admin::ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
   
+  def edit
+    @item = Item.find(params[:id])
+    @genres = Genre.all
+  end
+  
   private
 
   def params_item
