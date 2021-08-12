@@ -30,6 +30,16 @@ class Admin::ItemsController < ApplicationController
     @genres = Genre.all
   end
   
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(params_item)
+      redirect_to admin_item_path(@item)
+    else
+      @genres = Genre.all
+      render :edit
+    end 
+  end
+  
   private
 
   def params_item
