@@ -20,4 +20,10 @@ class Admin::OrdersController < ApplicationController
     order.order_item_status_auto_update
     redirect_to admin_order_path(params[:id])
   end
+  
+  private
+
+  def order_params
+    params.require(:order).permit(:status)
+  end
 end
