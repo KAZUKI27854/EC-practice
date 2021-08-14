@@ -8,4 +8,9 @@ class Admin::OrdersController < ApplicationController
       @orders = Order.where(customer_id: params[:customer_id]).page(params[:page]).reverse_order
     end
   end
+  
+  def show
+    @order = Order.find(params[:id])
+    @order_items = @order.order_items
+  end
 end
