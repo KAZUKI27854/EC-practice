@@ -7,4 +7,9 @@ class Item < ApplicationRecord
   attachment :image
   
   validates :name, :genre, :image, :caption, :price, presence: true
+  
+  def self.looks(word)
+    return none if word.blank?
+    @item = Item.where("name LIKE?", "%#{word}%")
+  end
 end
