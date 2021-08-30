@@ -26,4 +26,6 @@ describe '1.マスタ登録のテスト' do
       expect(current_path).to eq admin_genres_path
     end
   end
+  
+  
 end
