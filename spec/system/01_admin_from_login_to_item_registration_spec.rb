@@ -91,5 +91,44 @@ describe '1.マスタ登録のテスト' do
     end
   end
   
+  context '商品一覧画面(1商品登録後)のテスト' do
+    let!(:genre) { create(:genre) }
+    let!(:item) { create(:item) }
+
+    before do
+      visit admin_items_path
+    end
+
+    it '登録した商品が表示されている' do
+      expect(page).to have_content item.name
+      expect(page).to have_content item.price
+      expect(page).to have_content item.genre.name
+      expect(page).to have_content "販売中"
+    end
+
+    it '「商品作成はこちら」というリンクを押すと商品新規登録画面が表示される' do
+      click_link '商品作成はこちら'
+      expect(current_path).to eq new_admin_item_path
+    end
+  end
   
+  context '商品新規登録(2商品目)のテスト' do
+    let!(:genre) { create(:genre) }
+    let!(:item) { create(:item) }
+
+    before do
+      visit new_admin_item_path
+    end
+
+    it '必要事項を入力して登録ボタンを押すと登録した商品の詳細画面が表示される' do
+      attach_file 'item[image]', "#{Rails.root}/app/assets/images/strawberry-cake.jpg"
+      fill_in 'item[name]', with: 'りんごのケーキ(ホール)'
+      fill_in 'item[caption]', with: '高級りんごを贅沢に使用しています'
+      select genre.name, from: 'item[genre_id]'
+      fill_in 'item[price]', with: 2500
+      click_button '送信'
+      expect(page).to have_content '商品詳細'
+      expect(page).to have_content 'りんごのケーキ(ホール)'
+    end
+  end
 end
