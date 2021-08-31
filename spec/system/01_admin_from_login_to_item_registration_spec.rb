@@ -74,5 +74,22 @@ describe '1.マスタ登録のテスト' do
     end
   end
   
+  context 'ジャンル一覧画面のテスト' do
+    before do
+      visit admin_genres_path
+    end
+
+    it '必要事項を入力し、登録ボタンを押すと追加したジャンルが表示される' do
+      fill_in 'genre[name]', with: 'ケーキ'
+      click_button '新規登録'
+      expect(page).to have_content 'ケーキ'
+    end
+
+    it '商品一覧のリンクを押すと商品一覧画面が表示される' do
+      click_link '商品一覧'
+      expect(current_path).to eq admin_items_path
+    end
+  end
+  
   
 end
