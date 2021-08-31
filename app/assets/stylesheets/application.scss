@@ -20,4 +20,18 @@
 @import url('https://fonts.googleapis.com/css?family=Corben:700');
 @import url('https://fonts.googleapis.com/css?family=Sawarabi+Mincho');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+.header-logo {
+  font-family: 'Homemade Apple', cursive;
+}
+
+.header{
+  background-color: #222222;
+  font-family: "Sawarabi Mincho";
+  position: relative;
+}
