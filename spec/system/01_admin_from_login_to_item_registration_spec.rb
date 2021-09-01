@@ -170,5 +170,10 @@ describe '1.マスタ登録のテスト' do
       expect(page).to have_content item_2.genre.name
       expect(page).to have_content "販売中"
     end
+    
+    it '「ログアウト」リンクを押すと管理者ログイン画面に遷移する' do
+      click_link 'ログアウト'
+      expect(current_path).to eq new_admin_session_path
+    end
   end
 end
