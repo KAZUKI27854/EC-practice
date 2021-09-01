@@ -131,4 +131,23 @@ describe '1.マスタ登録のテスト' do
       expect(page).to have_content 'りんごのケーキ(ホール)'
     end
   end
+  
+  context '商品詳細画面(2商品登録後)のテスト' do
+    let!(:genre) { create(:genre) }
+    let!(:item_1) { create(:item) }
+    let!(:item_2) { create(:item) }
+
+    before do
+      visit admin_item_path(item_2)
+    end
+
+    it 'ヘッダーに「商品一覧」というリンクがある' do
+      expect(page).to have_link '商品一覧'
+    end
+
+    it '「商品一覧」のリンクを押すと商品一覧画面が表示される' do
+      click_link '商品一覧'
+      expect(current_path).to eq admin_items_path
+    end
+  end
 end
