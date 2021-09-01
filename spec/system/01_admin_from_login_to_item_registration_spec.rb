@@ -150,4 +150,25 @@ describe '1.マスタ登録のテスト' do
       expect(current_path).to eq admin_items_path
     end
   end
+  
+  context '商品一覧画面(2商品登録後)のテスト' do
+    let!(:genre) { create(:genre) }
+    let!(:item_1) { create(:item) }
+    let!(:item_2) { create(:item) }
+
+    before do
+      visit admin_items_path
+    end
+
+    it '登録した商品が2つとも表示されている' do
+      expect(page).to have_content item_1.name
+      expect(page).to have_content item_1.price
+      expect(page).to have_content item_1.genre.name
+      expect(page).to have_content "販売中"
+      expect(page).to have_content item_2.name
+      expect(page).to have_content item_2.price
+      expect(page).to have_content item_2.genre.name
+      expect(page).to have_content "販売中"
+    end
+  end
 end
