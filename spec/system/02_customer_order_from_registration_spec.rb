@@ -44,7 +44,20 @@ describe '登録〜注文のテスト' do
         expect(page).to have_content '2222222222'
       end
       
-      
+      it 'ヘッダーがログイン後の表示に変わっている' do
+        expect(page).to have_link 'マイページ'
+        expect(page).to have_link '商品一覧'
+        expect(page).to have_link 'カート'
+        expect(page).to have_link 'ログアウト'
+      end
     end
+    
+    context 'ヘッダーロゴのテスト' do
+     it 'ヘッダーロゴを押下してトップ画面に遷移することができる' do
+        click_on 'NaganoCAKE'
+        expect(current_path).to eq root_path
+      end
+    end
+    
   end
 end
