@@ -43,6 +43,8 @@ describe '登録〜注文のテスト' do
         expect(page).to have_content '123456789'
         expect(page).to have_content '2222222222'
       end
+      
+      
     end
   end
 end
