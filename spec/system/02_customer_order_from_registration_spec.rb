@@ -59,5 +59,17 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context 'トップ画面のテスト' do
+      let!(:genre) { create(:genre) }
+      let!(:item_1) { create(:item) }
+      let!(:item_2) { create(:item) }
+
+      it '商品画像を押下して該当商品の詳細画面に遷移する' do
+        visit root_path
+        find('a[href="/items/1"]').click
+        expect(current_path).to eq item_path(1)
+      end
+    end
+    
   end
 end
