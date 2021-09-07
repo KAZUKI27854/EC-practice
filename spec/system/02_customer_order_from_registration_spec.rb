@@ -69,6 +69,15 @@ describe '登録〜注文のテスト' do
         find('a[href="/items/1"]').click
         expect(current_path).to eq item_path(1)
       end
+      
+      it '押下した商品の商品情報が正しく表示されている' do
+        visit item_path(1)
+        expect(page).to have_content item_1.name
+        expect(page).to have_content item_1.caption
+        expect(page).to have_content (item_1.price * 1.1).floor
+        expect(page).to have_content item_1.genre_id
+        expect(item_1.is_active).to be true
+      end
     end
     
   end
