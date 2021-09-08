@@ -93,6 +93,14 @@ describe '登録〜注文のテスト' do
       it '個数を選択し、カートに入れるボタンを押下すると、カート画面に遷移する' do
         expect(current_path).to eq cart_items_path
       end
+      
+      it 'カートの中身が正しく表示されている' do
+        visit cart_items_path
+        expect(page).to have_content item.name
+        expect(page).to have_content (item.price * 1.1).floor
+        expect(page).to have_selector ("input[value='2']")
+        expect(page).to have_content (item.price * 1.1).floor * 2
+      end
     end
     
   end
