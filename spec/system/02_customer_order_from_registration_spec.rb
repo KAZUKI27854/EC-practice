@@ -80,5 +80,20 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context '商品詳細画面のテスト' do
+      let!(:genre) { create(:genre) }
+      let!(:item) { create(:item) }
+
+      before do
+        visit item_path(1)
+        find("option[value='2']").select_option
+        click_on 'カートに入れる'
+      end
+
+      it '個数を選択し、カートに入れるボタンを押下すると、カート画面に遷移する' do
+        expect(current_path).to eq cart_items_path
+      end
+    end
+    
   end
 end
