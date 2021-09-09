@@ -103,5 +103,30 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context '商品詳細画面のテスト（２回目）' do
+      let!(:genre) { create(:genre) }
+      let!(:item_1) { create(:item) }
+      let!(:item_2) { create(:item) }
+      let!(:cart_item) { create(:cart_item) }
+
+      def tax_price_1
+        (item_1.price * 1.1).floor
+      end
+
+      def tax_price_2
+        (item_2.price * 1.1).floor
+      end
+
+      it '既にカートの中身が入っている状況で、商品を追加した際、正しく中身が表示されている' do
+        visit item_path(2)
+        find("option[value='3']").select_option
+        click_on 'カートに入れる'
+        visit cart_items_path
+        expect(page).to have_content item_2.name
+        expect(page).to have_content tax_price_2 * 3
+        expect(page).to have_content tax_price_1 + tax_price_2 * 3
+      end
+    end
+    
   end
 end
