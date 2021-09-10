@@ -141,6 +141,12 @@ describe '登録〜注文のテスト' do
         click_on '買い物を続ける'
         expect(current_path).to eq root_path
       end
+      
+      it '商品の個数を変更し、更新ボタンを押下すると合計表示が正しく表示される' do
+        fill_in 'cart_item[quantity]', with: '3'
+        click_on '数量変更'
+        expect(page).to have_content (item.price * 1.1).floor * 3
+      end
     end
     
   end
