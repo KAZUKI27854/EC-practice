@@ -128,5 +128,20 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context 'カート画面のテスト' do
+       let!(:genre) { create(:genre) }
+       let!(:item) { create(:item) }
+       let!(:cart_item) { create(:cart_item) }
+
+       before do
+         visit cart_items_path
+       end
+
+      it '買い物を続けるボタンを押下するとトップ画面に遷移する' do
+        click_on '買い物を続ける'
+        expect(current_path).to eq root_path
+      end
+    end
+    
   end
 end
