@@ -147,6 +147,11 @@ describe '登録〜注文のテスト' do
         click_on '数量変更'
         expect(page).to have_content (item.price * 1.1).floor * 3
       end
+      
+      it '情報入力に進むボタンを押下すると情報入力画面に遷移する' do
+        click_on '情報入力に進む'
+        expect(current_path).to eq  new_order_path
+      end
     end
     
   end
