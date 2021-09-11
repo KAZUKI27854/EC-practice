@@ -154,5 +154,25 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context '注文情報入力画面のテスト' do
+       let!(:genre) { create(:genre) }
+       let!(:item) { create(:item) }
+       let!(:cart_item) { create(:cart_item) }
+
+       before do
+         visit new_order_path
+       end
+
+      it '支払い方法を選択し、住所をテキストに入力し、確認画面へ進むボタンを押下すると注文確認画面に遷移する' do
+        choose 'order_payment_method_銀行振込'
+        choose 'order_delivery_address_新しい届け先'
+        fill_in 'order[new_postcode]', with: '555555'
+        fill_in 'order[new_address]', with: '大阪府大阪市'
+        fill_in 'order[new_name]', with: '吉村知事'
+        click_on '確認画面へ進む'
+        expect(current_path).to eq orders_confirm_path
+      end
+    end
+    
   end
 end
