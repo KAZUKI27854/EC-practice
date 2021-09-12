@@ -174,5 +174,27 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context '注文確認画面のテスト' do
+      let!(:genre) { create(:genre) }
+      let!(:item) { create(:item) }
+      let!(:cart_item) { create(:cart_item) }
+
+      before do
+        visit new_order_path
+        choose 'order_payment_method_銀行振込'
+        choose 'order_delivery_address_新しい届け先'
+        fill_in 'order[new_postcode]', with: '555555'
+        fill_in 'order[new_address]', with: '大阪府大阪市'
+        fill_in 'order[new_name]', with: '吉村知事'
+        click_on '確認画面へ進む'
+      end
+
+      it '選択した商品、合計金額、配送方法などが表示されている' do
+        expect(page).to have_content item.name
+        expect(page).to have_content ((item.price * 1.1).floor * cart_item.quantity + 800).to_s(:delimited)
+        expect(page).to have_content '銀行振込'
+      end
+    end
+    
   end
 end
