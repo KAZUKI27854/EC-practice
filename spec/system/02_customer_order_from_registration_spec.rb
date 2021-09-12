@@ -194,6 +194,11 @@ describe '登録〜注文のテスト' do
         expect(page).to have_content ((item.price * 1.1).floor * cart_item.quantity + 800).to_s(:delimited)
         expect(page).to have_content '銀行振込'
       end
+      
+      it '確定ボタンを押下するとサンクスページに遷移する' do
+        click_on '注文を確定する'
+        expect(current_path).to eq orders_complete_path
+      end
     end
     
   end
