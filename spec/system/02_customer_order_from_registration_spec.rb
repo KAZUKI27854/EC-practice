@@ -201,5 +201,13 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context 'サンクスページのテスト' do
+      it 'ヘッダーのマイページへのリンクを押下するとマイページに遷移する' do
+        visit orders_complete_path
+        click_on 'マイページ'
+        expect(current_path).to eq customer_path(1)
+      end
+    end
+    
   end
 end
