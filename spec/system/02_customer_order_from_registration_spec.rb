@@ -209,5 +209,13 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context 'マイページのテスト' do
+      it '注文履歴の一覧を見るのリンクを押下すると注文履歴一覧画面へ遷移する' do
+        visit customer_path(1)
+        find('a[href="/orders"]').click
+        expect(current_path).to eq orders_path
+      end
+    end
+    
   end
 end
