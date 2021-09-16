@@ -217,7 +217,21 @@ describe '登録〜注文のテスト' do
       end
     end
     
-    
+    context '注文履歴一覧画面のテスト' do
+       let!(:genre) { create(:genre) }
+       let!(:item) { create(:item) }
+       let!(:cart_item) { create(:cart_item) }
+       let!(:order) { create(:order) }
+
+       before do
+         visit orders_path
+       end
+
+      it '注文した商品の詳細表示ボタンを押下すると注文詳細が表示される' do
+        click_on '表示する'
+        expect(current_path).to eq order_path(1)
+      end
+    end
     
   end
 end
