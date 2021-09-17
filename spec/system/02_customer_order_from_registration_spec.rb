@@ -233,5 +233,23 @@ describe '登録〜注文のテスト' do
       end
     end
     
+    context '注文詳細画面のテスト' do
+      let!(:genre) { create(:genre) }
+      let!(:item) { create(:item) }
+      let!(:cart_item) { create(:cart_item) }
+      let!(:order) { create(:order) }
+
+      before do
+        visit order_path(1)
+      end
+
+      it '注文内容が正しく表示されている' do
+        expect(page).to have_content order.delivery_address
+        expect(page).to have_content order.delivery_postcode
+        expect(page).to have_content order.total_price.to_s(:delimited)
+        expect(page).to have_content 'クレジットカード'
+      end
+
+    end
   end
 end
