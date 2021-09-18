@@ -249,7 +249,10 @@ describe '登録〜注文のテスト' do
         expect(page).to have_content order.total_price.to_s(:delimited)
         expect(page).to have_content 'クレジットカード'
       end
-
+      
+      it 'ステータスが「入金待ち」になっている' do
+        expect(page).to have_content '入金待ち'
+      end
     end
   end
 end
