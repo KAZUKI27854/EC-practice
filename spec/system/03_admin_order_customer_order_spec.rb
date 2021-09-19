@@ -16,3 +16,7 @@ describe '1.マスタ登録のテスト' do
     click_button 'ログイン'
   end
   
+  it 'ログイン後、管理者トップ（注文履歴一覧）が表示される' do
+    expect(current_path).to eq admin_orders_path
+  end
+end
