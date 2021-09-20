@@ -19,4 +19,8 @@ describe '1.マスタ登録のテスト' do
   it 'ログイン後、管理者トップ（注文履歴一覧）が表示される' do
     expect(current_path).to eq admin_orders_path
   end
+  
+  it 'ログイン後、ヘッダーに注文履歴一覧のリンクが存在する' do
+    expect(page).to have_link '注文履歴一覧'
+  end
 end
