@@ -23,4 +23,9 @@ describe '1.マスタ登録のテスト' do
   it 'ログイン後、ヘッダーに注文履歴一覧のリンクが存在する' do
     expect(page).to have_link '注文履歴一覧'
   end
+  
+  it '注文履歴一覧をクリックすると注文一覧ページが表示される' do
+    click_link '注文履歴一覧'
+    expect(current_path).to eq admin_orders_path
+  end
 end
