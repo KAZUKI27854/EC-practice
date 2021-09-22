@@ -28,4 +28,14 @@ describe '1.マスタ登録のテスト' do
     click_link '注文履歴一覧'
     expect(current_path).to eq admin_orders_path
   end
+  
+  context '注文履歴一覧画面のテスト' do
+    before do
+      visit admin_orders_path
+    end
+
+    it "注文一覧画面の中に注文詳細画面へのリンク先が表示される" do
+      expect(page).to have_css '.rspecorder'
+    end
+  end
 end
