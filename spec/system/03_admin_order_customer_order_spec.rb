@@ -50,5 +50,11 @@ describe '1.マスタ登録のテスト' do
       find(".order_btn").click
       expect(order_item.reload.product_status).to eq "製作待ち"
     end
+    
+    it '製作ステータスを１つ製作中に変更する' do
+      select "製作中", from: 'order_item[product_status]'
+      find('.order_item_btn').click
+      expect(order.reload.status).to eq "製作中"
+    end
   end
 end
