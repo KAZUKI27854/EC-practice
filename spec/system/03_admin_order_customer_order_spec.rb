@@ -42,6 +42,7 @@ describe '1.マスタ登録のテスト' do
   context '注文詳細画面のテスト' do
     before do
       visit admin_order_path(order.id)
+      OrderItem.create(item_id: 2, order_id: 1, quantity: 1, market_price: item_2.price, product_status: 3)
     end
 
     it '注文ステータスを入金確認に変更すると制作ステータスが制作待ちに更新される' do
