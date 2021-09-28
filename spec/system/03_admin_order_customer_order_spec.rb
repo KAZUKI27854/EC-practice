@@ -62,5 +62,11 @@ describe '1.マスタ登録のテスト' do
       find('.order_item_btn').click
       expect(order.reload.status).to eq '発送準備中'
     end
+    
+    it '注文ステータスを発送済みに変更し更新されるか' do
+      select "発送済み", from: 'order[status]'
+      find('.order_btn').click
+      expect(order.reload.status).to eq '発送済み'
+    end
   end
 end
