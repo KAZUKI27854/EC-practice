@@ -68,5 +68,10 @@ describe '1.マスタ登録のテスト' do
       find('.order_btn').click
       expect(order.reload.status).to eq '発送済み'
     end
+    
+    it 'ヘッダのログアウトリンクを押下したらログアウトされる' do
+      click_link 'ログアウト'
+      expect(current_path).to eq new_admin_session_path
+    end
   end
 end
