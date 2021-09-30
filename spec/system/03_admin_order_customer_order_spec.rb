@@ -74,4 +74,19 @@ describe '1.マスタ登録のテスト' do
       expect(current_path).to eq new_admin_session_path
     end
   end
+  
+  describe 'ECサイト（顧客側のテスト）' do
+    let!(:customer) {create(:customer)}
+    let!(:genre) { create(:genre) }
+    let!(:item) { create(:item) }
+    let!(:order) { create(:order) }
+    let!(:order_item) { create(:order_item) }
+  
+    before do
+      visit new_customer_session_path
+      fill_in 'customer[email]', with: customer.email
+      fill_in 'customer[password]', with: customer.password
+      click_button 'ログイン'
+    end
+  end
 end
