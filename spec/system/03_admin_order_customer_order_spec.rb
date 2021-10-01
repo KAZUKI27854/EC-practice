@@ -88,5 +88,11 @@ describe '1.マスタ登録のテスト' do
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
     end
+    
+    context '顧客のログインテスト' do
+      it 'ログイン後、トップ画面になっているか' do
+        expect(current_path).to eq root_path
+      end
+      
   end
 end
