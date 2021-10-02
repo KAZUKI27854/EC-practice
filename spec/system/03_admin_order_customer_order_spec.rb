@@ -93,6 +93,6 @@ describe '1.マスタ登録のテスト' do
       it 'ログイン後、トップ画面になっているか' do
         expect(current_path).to eq root_path
       end
-      
+    end
   end
 end
