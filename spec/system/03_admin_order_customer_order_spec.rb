@@ -93,6 +93,10 @@ describe '1.マスタ登録のテスト' do
       it 'ログイン後、トップ画面になっているか' do
         expect(current_path).to eq root_path
       end
+      
+      it 'ヘッダにマイページのリンクがあるか' do
+        expect(page).to have_link 'マイページ', href: customer_path(1)
+      end
     end
   end
 end
