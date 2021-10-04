@@ -97,6 +97,8 @@ describe '1.マスタ登録のテスト' do
       it 'ヘッダにマイページのリンクがあるか' do
         expect(page).to have_link 'マイページ', href: customer_path(1)
       end
+      
+      
     end
   end
 end
