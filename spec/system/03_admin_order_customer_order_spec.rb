@@ -102,6 +102,10 @@ describe '1.マスタ登録のテスト' do
         expect(page).to have_link '商品一覧', href: items_path
       end
       
+      it 'ヘッダにカートページのリンクがあるか' do
+        expect(page).to have_link 'カート', href: cart_items_path
+      end
+      
     end
   end
 end
