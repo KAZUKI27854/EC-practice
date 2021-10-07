@@ -106,6 +106,10 @@ describe '1.マスタ登録のテスト' do
         expect(page).to have_link 'カート', href: cart_items_path
       end
       
+      it 'ヘッダにログアウトのリンクがあるか' do
+        expect(page).to have_link 'ログアウト', href: destroy_customer_session_path
+      end
+      
     end
   end
 end
