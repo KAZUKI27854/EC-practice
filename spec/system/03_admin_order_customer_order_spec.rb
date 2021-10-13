@@ -110,6 +110,11 @@ describe '1.マスタ登録のテスト' do
         expect(page).to have_link 'ログアウト', href: destroy_customer_session_path
       end
       
+      it 'マイページリンクを押下してマイページが表示されるか' do
+        click_on 'マイページ'
+        expect(current_path).to eq customer_path(1)
+      end
+      
     end
   end
 end
