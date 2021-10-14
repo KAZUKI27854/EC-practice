@@ -114,7 +114,12 @@ describe '1.マスタ登録のテスト' do
         click_on 'マイページ'
         expect(current_path).to eq customer_path(1)
       end
-      
+    end
+    
+    context '顧客側の注文一覧ページのテスト' do
+      before do
+        visit customer_path(1)
+      end
     end
   end
 end
