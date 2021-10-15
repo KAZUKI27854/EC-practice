@@ -120,6 +120,10 @@ describe '1.マスタ登録のテスト' do
       before do
         visit customer_path(1)
       end
+      
+      it '注文した注文詳細表示リンクがあるか' do
+          expect(page).to have_link '表示する', href: order_path(1)
+        end
     end
   end
 end
