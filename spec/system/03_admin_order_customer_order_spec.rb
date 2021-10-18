@@ -124,6 +124,11 @@ describe '1.マスタ登録のテスト' do
       it '注文した注文詳細表示リンクがあるか' do
         expect(page).to have_link '表示する', href: order_path(1)
       end
+      
+      it '注文詳細履歴ボタンを押下して遷移するか' do
+        click_on '表示する'
+        expect(current_path).to eq order_path(1)
+      end
     end
   end
 end
