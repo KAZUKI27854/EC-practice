@@ -129,6 +129,8 @@ describe '1.マスタ登録のテスト' do
         click_on '表示する'
         expect(current_path).to eq order_path(1)
       end
+      
+      
     end
   end
 end
