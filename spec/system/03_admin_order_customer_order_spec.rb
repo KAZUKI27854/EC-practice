@@ -130,6 +130,10 @@ describe '1.マスタ登録のテスト' do
         expect(current_path).to eq order_path(1)
       end
       
+      it '注文ステータスが発送済みになっているか' do
+        visit order_path(1)
+        expect(page).to have_content '発送済み'
+      end
       
     end
   end
