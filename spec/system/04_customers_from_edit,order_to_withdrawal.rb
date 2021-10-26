@@ -18,5 +18,24 @@ describe '4.顧客登録情報変更〜退会のテスト' do
         expect(current_path).to eq edit_customer_path(customer)
       end
     end
+    
+    context '会員情報編集画面とマイページのテスト' do
+      before do
+        visit edit_customer_path(customer)
+        fill_in 'customer[last_name]', with: '山田'
+        fill_in 'customer[first_name]', with: '太郎'
+        fill_in 'customer[last_name_kana]', with: 'ヤマダ'
+        fill_in 'customer[first_name_kana]', with: 'タロウ'
+        fill_in 'customer[postcode]', with: '1234567'
+        fill_in 'customer[address]', with: '京都府京都市金閣寺町1234'
+        fill_in 'customer[phone_number]', with: '09012345678'
+        fill_in 'customer[email]', with: 'yamada@tarou.com'
+        click_button '編集内容を保存'
+      end
+
+      it '全項目を編集し「編集内容を保存」を押すとマイページに遷移する' do
+        expect(current_path).to eq customer_path(customer)
+      end
+    end
   end
 end
