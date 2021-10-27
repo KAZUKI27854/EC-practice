@@ -36,6 +36,17 @@ describe '4.顧客登録情報変更〜退会のテスト' do
       it '全項目を編集し「編集内容を保存」を押すとマイページに遷移する' do
         expect(current_path).to eq customer_path(customer)
       end
+      
+      it 'マイページに変更した内容が表示されている' do
+        expect(page).to have_content '山田'
+        expect(page).to have_content '太郎'
+        expect(page).to have_content 'ヤマダ'
+        expect(page).to have_content 'タロウ'
+        expect(page).to have_content '1234567'
+        expect(page).to have_content '京都府京都市金閣寺町1234'
+        expect(page).to have_content '09012345678'
+        expect(page).to have_content 'yamada@tarou.com'
+      end
     end
   end
 end
