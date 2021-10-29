@@ -47,6 +47,11 @@ describe '4.顧客登録情報変更〜退会のテスト' do
         expect(page).to have_content '09012345678'
         expect(page).to have_content 'yamada@tarou.com'
       end
+      
+      it 'マイページで配送先の「一覧を表示する」ボタンを押すと配送先一覧画面に遷移する' do
+        find('a[href="/deliveries"]').click
+        expect(current_path).to eq deliveries_path
+      end
     end
   end
 end
