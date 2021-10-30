@@ -53,5 +53,15 @@ describe '4.顧客登録情報変更〜退会のテスト' do
         expect(current_path).to eq deliveries_path
       end
     end
+    
+     context '配送先一覧画面のテスト' do
+      before do
+        visit deliveries_path
+        fill_in 'delivery[postcode]', with: '7654321'
+        fill_in 'delivery[address]', with: '大阪府大阪市北区9876'
+        fill_in 'delivery[name]', with: '山田花子'
+        click_button '新規登録'
+      end
+      
   end
 end
