@@ -63,5 +63,9 @@ describe '4.顧客登録情報変更〜退会のテスト' do
         click_button '新規登録'
       end
       
+      it '各項目を入力し、新規登録ボタンを押すと自画面が再描画される' do
+        expect(current_path).to eq deliveries_path
+      end
+    end
   end
 end
