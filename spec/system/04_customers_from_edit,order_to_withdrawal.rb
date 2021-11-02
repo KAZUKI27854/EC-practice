@@ -66,6 +66,12 @@ describe '4.顧客登録情報変更〜退会のテスト' do
       it '各項目を入力し、新規登録ボタンを押すと自画面が再描画される' do
         expect(current_path).to eq deliveries_path
       end
+      
+      it '登録した内容が配送先一覧画面に反映されている' do
+        expect(page).to have_content '7654321'
+        expect(page).to have_content '大阪府大阪市北区9876'
+        expect(page).to have_content '山田花子'
+      end
     end
   end
 end
